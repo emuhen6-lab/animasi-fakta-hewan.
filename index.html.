@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fakta Shoebill - Animasi 2D</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #172c35;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+.container {
+  width: min(100vw, 405px);
+  aspect-ratio: 9 / 16;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(#8ac6c0, #d5d5a1 55%, #587d58);
+  border-radius: 18px;
+}
+
+.sun {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #ffe7a1;
+  top: 65px;
+  right: 45px;
+  box-shadow: 0 0 45px #fff2bd;
+}
+
+.cloud {
+  position: absolute;
+  top: 110px;
+  left: -100px;
+  width: 100px;
+  height: 30px;
+  background: #ffffff90;
+  border-radius: 50%;
+  animation: cloud 18s linear infinite;
+}
+
+@keyframes cloud {
+  to { transform: translateX(550px); }
+}
+
+.water {
+  position: absolute;
+  bottom: 0;
+  height: 36%;
+  width: 100%;
+  background: linear-gradient(#7ba99a, #315d55);
+}
+
+.ripple {
+  position: absolute;
+  width: 110px;
+  height: 12px;
+  border: 2px solid #c6e4c5;
+  border-radius: 50%;
+  bottom: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: ripple 2s infinite;
+}
+
+@keyframes ripple {
+  0% { transform: translateX(-50%) scale(.5); opacity: 1; }
+  100% { transform: translateX(-50%) scale(2); opacity: 0; }
+}
+
+.bird {
+  position: absolute;
+  width: 260px;
+  height: 340px;
+  left: 50%;
+  bottom: 19%;
+  transform: translateX(-50%);
+  animation: bob 3s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%,100% { margin-bottom: 0; }
+  50% { margin-bottom: 7px; }
+}
+
+.body {
+  position: absolute;
+  width: 155px;
+  height: 190px;
+  background: #747a70;
+  border: 5px solid #424b45;
+  border-radius: 48% 48% 42% 42%;
+  left: 50px;
+  top: 105px;
+}
+
+.wing {
+  position: absolute;
+  width: 120px;
+  height: 150px;
+  background: #5d665f;
+  border: 4px solid #424b45;
+  border-radius: 50%;
+  left: 62px;
+  top: 125px;
+  transform: rotate(-15deg);
+}
+
+.neck {
+  position: absolute;
+  width: 65px;
+  height: 135px;
+  background: #777e72;
+  border: 5px solid #424b45;
+  border-radius: 45%;
+  left: 105px;
+  top: 30px;
+}
+
+.head {
+  position: absolute;
+  width: 115px;
+  height: 100px;
+  background: #858b7c;
+  border: 5px solid #424b45;
+  border-radius: 48%;
+  left: 80px;
+  top: 0;
+  z-index: 3;
+  animation: look 5s ease-in-out infinite;
+  transform-origin: 55% 90%;
+}
+
+@keyframes look {
+  0%,40%,100% { transform: rotate(0); }
+  50%,70% { transform: rotate(-8deg); }
+}
+
+.eye {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #f4d34f;
+  border: 3px solid #292d27;
+  border-radius: 50%;
+  top: 38px;
+  left: 65px;
+  animation: blink 4s infinite;
+}
+
+@keyframes blink {
+  0%,94%,100% { transform: scaleY(1); }
+  96% { transform: scaleY(.1); }
+}
+
+.beak {
+  position: absolute;
+  width: 100px;
+  height: 75px;
+  background: #b9a15d;
+  border: 5px solid #514a35;
+  border-radius: 15% 15% 55% 45%;
+  top: 48px;
+  left: 145px;
+  z-index: 4;
+  transform-origin: 0 10%;
+  animation: peck 6s ease-in-out infinite;
+}
+
+.beak::after {
+  content: "";
+  position: absolute;
+  width: 35px;
+  height: 42px;
+  background: #9e874b;
+  border: 3px solid #514a35;
+  border-radius: 0 0 50% 50%;
+  bottom: -34px;
+  left: 28px;
+}
+
+@keyframes peck {
+  0%,65%,100% { transform: rotate(0); }
+  70% { transform: rotate(25deg); }
+  76% { transform: rotate(-5deg); }
+}
+
+.leg {
+  position: absolute;
+  width: 9px;
+  height: 90px;
+  background: #a18c58;
+  top: 275px;
+  border-radius: 8px;
+}
+
+.leg.left { left: 100px; }
+.leg.right { left: 155px; }
+
+.leg::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -15px;
+  width: 35px;
+  height: 8px;
+  background: #a18c58;
+  border-radius: 50%;
+}
+
+.fish {
+  position: absolute;
+  bottom: 22%;
+  left: -60px;
+  font-size: 40px;
+  animation: fish 7s linear infinite;
+}
+
+@keyframes fish {
+  to { left: 110%; }
+}
+
+.title {
+  position: absolute;
+  top: 35px;
+  width: 100%;
+  text-align: center;
+  font-weight: 900;
+  font-size: 27px;
+  color: white;
+  text-shadow: 2px 3px 5px #243d35;
+}
+
+.subtitle {
+  position: absolute;
+  bottom: 9%;
+  width: 90%;
+  left: 5%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.4;
+  color: white;
+  text-shadow: 2px 2px 5px black;
+  background: #203c35a8;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.controls {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+
+button {
+  background: #ffcf62;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="sun"></div>
+  <div class="cloud"></div>
+  <div class="title">MISTERI SHOEBILL!</div>
+
+  <div class="water"></div>
+  <div class="ripple"></div>
+  <div class="fish">🐟</div>
+
+  <div class="bird">
+    <div class="body"></div>
+    <div class="wing"></div>
+    <div class="neck"></div>
+    <div class="head">
+      <div class="eye"></div>
+    </div>
+    <div class="beak"></div>
+    <div class="leg left"></div>
+    <div class="leg right"></div>
+  </div>
+
+  <div class="subtitle" id="caption">
+    Burung ini mirip dinosaurus!
+  </div>
+
+  <div class="controls">
+    <button onclick="replay()">▶ Putar Ulang</button>
+  </div>
+</div>
+
+<script>
+const captions = [
+  [0, "Burung ini mirip dinosaurus!"],
+  [5, "Kenalkan, inilah Shoebill!"],
+  [11, "Lihat paruhnya! Besar seperti sepatu!"],
+  [17, "Ia bisa menunggu mangsa dengan sabar."],
+  [23, "Lalu... SERGAP! Ikan langsung tertangkap!"],
+  [27, "Burung atau dinosaurus?"],
+];
+
+let startTime;
+let animationFrame;
+const caption = document.getElementById("caption");
+
+function animate(timestamp) {
+  if (!startTime) startTime = timestamp;
+
+  let elapsed = (timestamp - startTime) / 1000;
+
+  if (elapsed >= 30) {
+    cancelAnimationFrame(animationFrame);
+    caption.textContent = "Terima kasih sudah menonton!";
+    return;
+  }
+
+  for (let i = captions.length - 1; i >= 0; i--) {
+    if (elapsed >= captions[i][0]) {
+      caption.textContent = captions[i][1];
+      break;
+    }
+  }
+
+  animationFrame = requestAnimationFrame(animate);
+}
+
+function replay() {
+  cancelAnimationFrame(animationFrame);
+  startTime = null;
+  animationFrame = requestAnimationFrame(animate);
+}
+
+replay();
+</script>
+
+</body>
+</html>
